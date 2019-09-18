@@ -35,22 +35,23 @@ with open(File_Name, newline='') as csvfile:
             Prev_Profit = Monthly_Profit
             Total_Monthly_Change = Total_Monthly_Change + Monthly_Change
             
-
-        #The greatest increase in profits (date and amount) over the entire period
-        if Monthly_Profit > Greatest_Increase:
-            Greatest_Increase = Monthly_Profit
-            Greatest_Increase_Date = row[0]
-        #The greatest decrease in losses (date and amount) over the entire period
-        elif Monthly_Profit < Greatest_Decrease:
-            Greatest_Decrease = Monthly_Profit
-            Greatest_Decrease_Date = row[0]
+            #The greatest increase in profits (date and amount) over the entire period
+            if Monthly_Change > Greatest_Increase:
+                Greatest_Increase = Monthly_Change
+                Greatest_Increase_Date = row[0]
+            #The greatest decrease in losses (date and amount) over the entire period
+            elif Monthly_Change < Greatest_Decrease:
+                Greatest_Decrease = Monthly_Change
+                Greatest_Decrease_Date = row[0]
 
 #Defining Average Change at the end of the for loop
-Average_Change = Total_Monthly_Change/Number_Of_Months
+Average_Change = round(Total_Monthly_Change/(Number_Of_Months - 1), 2)
 
+#Output to terminal and text file
 Financial_Analysis = "Financial Analysis\n--------------------------------------------------\nTotal Months: {}\nTotal: ${}\nAverage Change: ${}\nGreatest Increase In Profits: {} (${})\nGreatest Decrease In Profits: {} (${})".format(Number_Of_Months, Net_Total, Average_Change,Greatest_Increase_Date, Greatest_Increase, Greatest_Decrease_Date, Greatest_Decrease)
 print(Financial_Analysis)
 
-Output_Object = open("Financial Analysis.txt", 'w')
+File = "/Users/celiakresser/Documents/GitHub/Python-Challenge/PyBank/Financial Analysis.txt"
+Output_Object = open(File, 'w')
 Output_Object.write(Financial_Analysis)
-Output_Object.close()
+Output_Object.close
